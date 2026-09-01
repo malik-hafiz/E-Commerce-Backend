@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "items": [
+      {
+        "productId": 2,
+        "name": "Polo with Tipping Details",
+        "price": 180,
+        "image": "https://images.unsplash.com/photo-1625910513413-5fc45d6b2a0b?auto=format&fit=crop&w=900&q=80",
+        "quantity": 1,
+        "size": null,
+        "color": null
+      },
+      {
+        "productId": 1,
+        "name": "Gradient Graphic T-shirt",
+        "price": 145,
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80",
+        "quantity": 1,
+        "size": null,
+        "color": null
+      }
+    ],
+    "totalAmount": 325,
+    "shippingAddress": {
+      "name": "Muhammad Hafiz",
+      "phone": "03160244929",
+      "address": "karachi",
+      "city": "Karachi"
+    },
+    "paymentMethod": "Cash on Delivery",
+    "status": "Pending",
+    "createdAt": "2026-08-28T19:59:04.036Z"
+  }
+]
