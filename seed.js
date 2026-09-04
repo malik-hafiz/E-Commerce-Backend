@@ -1,15 +1,99 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
-const fs = require("fs");
-const path = require("path");
+const Product = require("./models/Product");
 
-const Product = require("./models/product");
+const products = [
+  {
+    id: 1,
+    name: "T-SHIRT WITH TAPE DETAILS",
+    category: "T-Shirts",
+    price: 145,
+    oldPrice: 180,
+    rating: 4.5,
+    image: "/images/Frame 32.png",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["Black", "White"],
+  },
 
+  {
+    id: 2,
+    name: "SKINNY FIT JEANS",
+    category: "Jeans",
+    price: 180,
+    rating: 4.8,
+    image: "/images/Frame 33.png",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["White", "Blue"],
+  },
 
-// =========================
-// CONNECT TO MONGODB
-// =========================
+  {
+    id: 3,
+    name: "CHECKERED SHIRT",
+    category: "Shirts",
+    price: 120,
+    oldPrice: 150,
+    rating: 4.3,
+    image: "/images/Frame 34.png",
+    sizes: ["S", "M", "L"],
+  },
+
+  {
+    id: 4,
+    name: "SLEEVE STRIPED T-SHIRT",
+    category: "T-Shirts",
+    price: 210,
+    rating: 4.6,
+    image: "/images/Frame 38.png",
+    sizes: ["S", "M", "L"],
+    colors: ["White", "Blue"],
+  },
+
+  {
+    id: 5,
+    name: "VERTICAL STRIPED SHIRT",
+    category: "Shirts",
+    price: 160,
+    oldPrice: 200,
+    rating: 4.4,
+    image: "/images/Frame 32 (1).png",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["Brown", "Black"],
+  },
+
+  {
+    id: 6,
+    name: "COURAGE GRAPHIC T-SHIRT",
+    category: "Shirts",
+    price: 190,
+    rating: 4.7,
+    image: "/images/Frame 33 (1).png",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["White", "Blue"],
+  },
+
+  {
+    id: 7,
+    name: "LOOSE FIT BERMUDA SHORTS",
+    category: "Shorts",
+    price: 140,
+    rating: 4.2,
+    image: "/images/Frame 34 (1).png",
+    sizes: ["S", "M", "L"],
+    colors: ["Black", "White"],
+  },
+
+  {
+    id: 8,
+    name: "FADED SKINNY JEANS",
+    category: "Jeans",
+    price: 115,
+    rating: 4.5,
+    image: "/images/Frame 38 (1).png",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["Black", "Grey"],
+  },
+];
 
 const seedProducts = async () => {
   try {
@@ -17,51 +101,21 @@ const seedProducts = async () => {
 
     console.log("MongoDB connected");
 
-    // JSON file path
-    const filePath = path.join(
-      __dirname,
-      "data",
-      "products.json"
-    );
-
-    // Read JSON file
-    const data = fs.readFileSync(
-      filePath,
-      "utf-8"
-    );
-
-    const products = JSON.parse(data);
-
-    console.log(
-      `${products.length} products found in JSON`
-    );
-
-    // Remove existing products
     await Product.deleteMany({});
 
-    console.log("Old products deleted");
-
-    // Insert products
     await Product.insertMany(products);
 
-    console.log(
-      `${products.length} products inserted into MongoDB`
-    );
+    console.log("Products seeded successfully!");
 
-    // Close connection
     await mongoose.connection.close();
 
     console.log("MongoDB connection closed");
 
-    process.exit(0);
   } catch (error) {
     console.error("Seed error:", error);
-
-    await mongoose.connection.close();
 
     process.exit(1);
   }
 };
-
 
 seedProducts();
