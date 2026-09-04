@@ -4,19 +4,23 @@ const {
   createOrder,
   getMyOrders,
   getOrderById,
+  cancelOrder,
 } = require("../controllers/orders");
 
-const auth = require("../middlewares/auth");
+const authMiddleware = require("../middleware/auth");
 
 const router = express.Router();
 
 // Create order
-router.post("/", auth, createOrder);
+router.post("/", authMiddleware, createOrder);
 
 // Get logged-in user's orders
-router.get("/my-orders", auth, getMyOrders);
+router.get("/", authMiddleware, getMyOrders);
 
 // Get single order
-router.get("/:id", auth, getOrderById);
+router.get("/:id", authMiddleware, getOrderById);
+
+// Cancel order
+router.put("/:id/cancel", authMiddleware, cancelOrder);
 
 module.exports = router;
