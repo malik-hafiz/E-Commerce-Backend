@@ -42,26 +42,28 @@ const signup = async (req, res) => {
 
     // Create JWT
     const token = jwt.sign(
-      {
-        userId: user._id,
-        email: user.email,
-      },
-      process.env.SECRET_KEY,
-      {
-        expiresIn: "1h",
-      }
-    );
+  {
+    userId: user._id,
+    email: user.email,
+    role: user.role,
+  },
+  process.env.SECRET_KEY,
+  {
+    expiresIn: "1h",
+  }
+);
 
     res.status(201).json({
       message: "Signup successful",
 
       token,
 
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-      },
+     user: {
+  id: user._id,
+  name: user.name,
+  email: user.email,
+  role: user.role,
+},
     });
   } catch (error) {
     console.error("Signup error:", error);
@@ -117,6 +119,7 @@ const login = async (req, res) => {
       {
         userId: user._id,
         email: user.email,
+         role: user.role,
       },
       process.env.SECRET_KEY,
       {
@@ -130,10 +133,11 @@ const login = async (req, res) => {
       token,
 
       user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-      },
+  id: user._id,
+  name: user.name,
+  email: user.email,
+  role: user.role,
+},
     });
   } catch (error) {
     console.error("Login error:", error);
